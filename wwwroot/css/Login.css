@@ -1,0 +1,22 @@
+﻿
+.container {
+    background-image: url('../backgroung main-min.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#Labellogin {
+    font-family: fertigo-script, sans-serif;
+    font-style: normal;
+    font-size: 48px;
+}
+
+#Divlogin {
+    margin-top: 24%;
+    text-align: center;
+    
+}
+
+#row {
+}

@@ -1,0 +1,77 @@
+﻿!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - doceglamour</title>
+    <link rel="stylesheet" href="~/Bootstrap 4/css/bootstrap.min.css" />
+    <link href="~/fontawesome-free-5.12.1-web/css/all.css" rel="stylesheet">
+    <link href="~/css/PagedList.css" rel="stylesheet" />
+    <link href="~/css/Menu.css" rel="stylesheet" />
+    <link href="~/css/Main.css" rel="stylesheet" />
+
+</head>
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Doce glamour</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Procurar" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class=" col-md-2 col-lg-2 d-none d-md-block bg-light sidebar">
+
+                <ul class=" nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../Menu/Index">
+                            <i class="fas fa-fast-backward"></i>Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Cliente/Index">
+                            <i class="fas fa-user-plus"></i>Cliente
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-box-open"></i>Produto
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-cart-arrow-down"></i>Pedido
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-dollar-sign"></i>Fluxo de Caixa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-scroll"></i>Relatório
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+            @RenderBody()
+        </div>
+    </div>
+
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/Bootstrap 4/js/bootstrap.min.js"></script>
+    <script src="~/js/Action.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

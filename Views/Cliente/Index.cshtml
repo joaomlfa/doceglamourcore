@@ -1,0 +1,144 @@
+﻿@model X.PagedList.IPagedList<ClienteModel>
+@{
+    Layout = "_MenuLayout";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu Principal</title>
+    <link href="~/css/MenuCliente.css" rel="stylesheet"/>
+
+</head>
+<body>
+    
+    <main class="col-md-10 ml-sm-auto col-lg-10 ml-auto px-4">
+        <div class="d-flex justify-content-between align-items-center mt-4  pb-2 mb-3">
+
+
+            @{
+                try
+                {
+                    var errormessage = TempData["Verificacao"].ToString();
+
+                    if (errormessage.Equals("Cliente Cadastrado com Sucesso!!!"))
+                    {
+
+
+
+                        <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Feito!</strong> Cliente Cadastrado com Sucesso!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                    }
+                    else if (errormessage.Equals("Erro Ao Inserir Cliente Tente Novamente"))
+                    {
+
+                        <div class="alert alert-danger alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Opa!</strong>Erro ao Cadastrar Cliente - Por Favor Tente Novamente!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+
+                    }
+                    else if (errormessage.Equals("Cliente Excluido"))
+                    {
+                        <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Feito!</strong> Cliente Excluído com Sucesso!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                    else if (errormessage.Equals("Erro ao excluir Cliente"))
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Opa!</strong>Erro ao Excluir Cliente - Por Favor Tente Novamente!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                }
+                catch
+                {
+
+
+                }
+            }
+
+            <div>
+                <a asp-action="NovoCliente" class="btn btn-primary btn-sm " id="novocliente">Novo Cliente</a>
+            </div>
+
+
+
+
+
+        </div>
+        @if (Model.Count() > 0)
+        {
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome </th>
+                            <th>Telefone</th>
+                            <th>CPF/CNPJ</th>
+                            <th>Cidade</th>
+                            <th>Endereço</th>
+                            <th>Bairro</th>
+                            <th>Número</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int contador = 1;
+                        }
+                        @foreach (ClienteModel cliente in Model)
+                        {
+
+                            <tr>
+
+                                <td>@contador</td>
+                                <td>@cliente.nome</td>
+                                <td>@cliente.telefone</td>
+                                <td>@cliente.cnpj_cpf</td>
+                                <td>@cliente.cidade</td>
+                                <td>@cliente.rua</td>
+                                <td>@cliente.bairro</td>
+                                <td>@cliente.numero</td>
+                                <td>
+                                    <a asp-action="Atualizar" asp-route-id="@cliente.codigo_cliente" class=" btn btn-primary btn-sm ">Atualizar</a>
+                                    <a asp-action="Excluir"  asp-route-id="@cliente.codigo_cliente" class="btn btn-danger btn-sm excluirCliente">Excluir</a>
+                                </td>
+                                @{
+                                    contador++;
+                                }
+                            </tr>
+
+                        }
+
+                </table>
+                @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina} ))
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                Nenhum Cliente Cadastrado - Insira um Novo Cliente!!!
+            </div>
+        }
+
+    </main>
+    
+</body>
+</html>
