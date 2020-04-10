@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DoceGlamourCore.Models
 {
-    public class ClienteContext : DbContext
+    public class ProdutoContext : DbContext
     {
-        public ClienteContext(DbContextOptions<ClienteContext> options) : base(options)
+        public ProdutoContext(DbContextOptions<ProdutoContext> options) : base(options)
         {
 
         }
@@ -17,6 +17,7 @@ namespace DoceGlamourCore.Models
             modelBuilder.Entity<ProdutoPedidoModel>().HasKey(sc => new { sc.codigo_pedido, sc.id_produto });
 
         }
-        public DbSet<ClienteModel> cliente { get; set; }
+
+        public DbSet<ProdutoModel> produto { get; set; }
     }
 }

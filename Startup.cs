@@ -42,8 +42,10 @@ namespace doceglamour
            
             services.AddEntityFrameworkNpgsql().AddDbContext<UsuarioContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
             services.AddEntityFrameworkNpgsql().AddDbContext<ClienteContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
+            services.AddEntityFrameworkNpgsql().AddDbContext<ProdutoContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
+            services.AddEntityFrameworkNpgsql().AddDbContext<PedidoContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
 
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,4 @@
-﻿@model X.PagedList.IPagedList<ClienteModel>
+﻿@model X.PagedList.IPagedList<ProdutoModel>
 @{
     Layout = "_MenuLayout";
 }
@@ -8,11 +8,11 @@
 <html>
 <head>
     <title>Menu Principal</title>
-    <link href="~/css/MenuCliente.css" rel="stylesheet"/>
+    <link href="~/css/MenuCliente.css" rel="stylesheet" />
 
 </head>
 <body>
-    
+
     <main class="col-md-10 ml-sm-auto col-lg-10 ml-auto px-4">
         <div class="d-flex justify-content-between align-items-center mt-4  pb-2 mb-3">
 
@@ -22,24 +22,24 @@
                 {
                     var errormessage = TempData["Verificacao"].ToString();
 
-                    if (errormessage.Equals("Cliente Cadastrado com Sucesso!!!"))
+                    if (errormessage.Equals("Produto Cadastrado com Sucesso!!!"))
                     {
 
 
 
                         <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
-                            <strong>Feito!</strong> Cliente Cadastrado com Sucesso!
+                            <strong>Feito!</strong> Produto Cadastrado com Sucesso!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
 
                     }
-                    else if (errormessage.Equals("Erro Ao Inserir Cliente Tente Novamente"))
+                    else if (errormessage.Equals("Erro Ao Inserir Produto Tente Novamente"))
                     {
 
                         <div class="alert alert-danger alert-dismissible fade show fixed-bottom" role="alert">
-                            <strong>Opa!</strong>Erro ao Cadastrar Cliente - Por Favor Tente Novamente!
+                            <strong>Opa!</strong>Erro ao Cadastrar Produto - Por Favor Tente Novamente!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -47,19 +47,19 @@
 
 
                     }
-                    else if (errormessage.Equals("Cliente Excluido"))
+                    else if (errormessage.Equals("Produto Excluido"))
                     {
                         <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
-                            <strong>Feito!</strong> Cliente Excluído com Sucesso!
+                            <strong>Feito!</strong> Produto Excluído com Sucesso!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                     }
-                    else if (errormessage.Equals("Erro ao excluir Cliente"))
+                    else if (errormessage.Equals("Erro ao excluir Produto"))
                     {
                         <div class="alert alert-danger alert-dismissible fade show fixed-bottom" role="alert">
-                            <strong>Opa!</strong>Erro ao Excluir Cliente - Por Favor Tente Novamente!
+                            <strong>Opa!</strong>Erro ao Excluir Produto - Por Favor Tente Novamente!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -68,7 +68,7 @@
                     else if (errormessage.Equals("Alterado"))
                     {
                         <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
-                            <strong>Feito!</strong> Cliente Alterado com Sucesso!
+                            <strong>Feito!</strong> Produto Alterado com Sucesso!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -77,7 +77,7 @@
                     else if (errormessage.Equals("Erro ao alterar"))
                     {
                         <div class="alert alert-danger alert-dismissible fade show fixed-bottom" role="alert">
-                            <strong>Opa!</strong>Erro ao Alterar Cliente - Por Favor Tente Novamente!
+                            <strong>Opa!</strong>Erro ao Alterar Produto - Por Favor Tente Novamente!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -92,7 +92,7 @@
             }
 
             <div>
-                <a asp-action="NovoCliente" class="btn btn-primary btn-sm " id="novocliente">Novo Cliente</a>
+                <a asp-action="AdicionarProduto" class="btn btn-primary btn-sm " id="novoproduto">Novo Produto</a>
             </div>
 
 
@@ -108,35 +108,45 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nome </th>
-                            <th>Telefone</th>
-                            <th>CPF/CNPJ</th>
-                            <th>Cidade</th>
-                            <th>Endereço</th>
-                            <th>Bairro</th>
-                            <th>Número</th>
+                            <th>Código </th>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                            <th>Categoria</th>
+                            <th>Observação</th>
+                            <th>Foto</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @{
                             int contador = 1;
                         }
-                        @foreach (ClienteModel cliente in Model)
+                        @foreach (ProdutoModel produto in Model)
                         {
 
                             <tr>
 
                                 <td>@contador</td>
-                                <td>@cliente.nome</td>
-                                <td>@cliente.telefone</td>
-                                <td>@cliente.cnpj_cpf</td>
-                                <td>@cliente.cidade</td>
-                                <td>@cliente.rua</td>
-                                <td>@cliente.bairro</td>
-                                <td>@cliente.numero</td>
+                                <td>@produto.codigo_produto</td>
+                                <td>@produto.nome</td>
+                                <td>@produto.valor</td>
+                                <td>@produto.categoria</td>
+                                <td>@produto.observacao</td>
                                 <td>
-                                    <a asp-action="Alterar" asp-route-id="@cliente.codigo_cliente" class=" btn btn-primary btn-sm ">Atualizar</a>
-                                    <a asp-action="Excluir"  asp-route-id="@cliente.codigo_cliente" class="btn btn-danger btn-sm excluirCliente">Excluir</a>
+                                    @try
+                                    {
+                                        <img src="@produto.link_foto" width="150" height="150" />
+
+                                    }
+                                    catch
+                                    {
+                                        <label>SEM FOTO</label>
+
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Alterar" asp-route-id="@produto.id_produto" class=" btn btn-primary btn-sm ">Atualizar</a>
+                                    <a asp-action="Excluir" asp-route-id="@produto.id_produto" class="btn btn-danger btn-sm excluirCliente">Excluir</a>
                                 </td>
                                 @{
                                     contador++;
@@ -146,17 +156,17 @@
                         }
 
                 </table>
-                @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina} ))
+                @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina }))
             </div>
         }
         else
         {
             <div class="alert alert-danger" role="alert">
-                Nenhum Cliente Cadastrado - Insira um Novo Cliente!!!
+                Nenhum Produto Cadastrado - Insira um Novo Produto!!!
             </div>
         }
 
     </main>
-    
+
 </body>
 </html>

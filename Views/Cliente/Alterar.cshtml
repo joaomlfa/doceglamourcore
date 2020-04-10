@@ -1,0 +1,104 @@
+﻿@model ClienteModel
+@{
+    Layout = "_MenuLayout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Alterar Cliente</title>
+    <link href="~/css/Menu.css" rel="stylesheet" />
+</head>
+<body>
+
+    <main class="col-md-9 ml-sm-auto col-lg-10 ml-auto px-4">
+        <div class="d-flex justify-content-between align-items-center mt-4  pb-2 mb-3">
+            <div class="container">
+                <form asp-controller="Cliente" asp-action="Alterar" method="post">
+                    <input asp-for="codigo_cliente" type="hidden"/>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="nomeCliente">Nome</label>
+                            <input asp-for="nome" type="text" class="form-control" id="nomeCliente" placeholder="Nome">
+                            <span asp-validation-for="nome" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="cpf_cnpj">CPF ou CNPJ</label>
+                            <input asp-for="cnpj_cpf" type="tel" class="form-control" id="cpf_cnpj" placeholder="000.000.000-00 / 00.000.000/0001-00">
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="telefoneCliente">Telefone</label>
+                            <input asp-for="telefone" type="tel" class="form-control" id="telefoneCliente" placeholder="62991817731">
+                            <span asp-validation-for="telefone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ruaCliente">Rua</label>
+                        <input asp-for="rua" type="text" class="form-control" id="ruaCliente" placeholder="Rua Joao Moreira">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <label for="inputAddress2">Bairro</label>
+                            <input asp-for="bairro" type="text" class="form-control" id="bairroCliente" placeholder="Paraíso">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="numero">Número</label>
+                            <input asp-for="numero" type="text" class="form-control" id="numero" placeholder="123">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">Cidade</label>
+                            <input asp-for="cidade" type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputEstado">Estado</label>
+                            <select asp-for="uf" id="uf" class="form-control">
+                                <option selected value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espirito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="cepCliente">CEP</label>
+                            <input asp-for="cep" type="text" class="form-control" id="cepCliente">
+                        </div>
+                        <div class="form-group">
+                            <label for="complemento">Complemento</label>
+                            <textarea class="form-control" id="complemento" rows="3" asp-for="complemento"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

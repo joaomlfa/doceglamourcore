@@ -25,6 +25,7 @@ namespace DoceGlamourCore.Models
         public string cnpj_cpf { get; set; }
         public string uf { get; set; }
         public string cep { get; set; }
+        public ICollection<PedidoModel>  pedido { get; set; }
 
         public ClienteModel(int codigo_cliente, string nome, string telefone, string rua, string bairro, string cidade, string numero, string complemento, string cnpj_cpf, string uf)
         {
@@ -44,7 +45,7 @@ namespace DoceGlamourCore.Models
         {
 
         }
-        public IPagedList<ClienteModel> BuscarClientes(ClienteContext clienteContext, int? pagina)
+        public IPagedList<ClienteModel> BuscarClientesPaginados(ClienteContext clienteContext, int? pagina)
         {
             int PageNumber = pagina ?? 1;
             return clienteContext.cliente.ToPagedList(PageNumber, 15);
@@ -87,6 +88,31 @@ namespace DoceGlamourCore.Models
             var cliente = _clienteContext.cliente.Where(option => option.codigo_cliente == id).FirstOrDefault();
 
             return cliente;
+        }
+        public bool AlterarCliente(ClienteContext _clienteContext)
+        {
+            try
+            {
+                var clienteAntigo = _clienteContext.cliente.Where(option => option.codigo_cliente == this.codigo_cliente).FirstOrDefault();
+                clienteAntigo.numero = this.numero;
+                clienteAntigo.nome = this.nome;
+                clienteAntigo.rua = this.rua;
+                clienteAntigo.telefone = this.telefone;
+                clienteAntigo.uf = this.uf;
+                clienteAntigo.cep = this.cep;
+                clienteAntigo.cnpj_cpf = this.cnpj_cpf;
+                clienteAntigo.cidade = this.cidade;
+                clienteAntigo.bairro = this.bairro;
+                clienteAntigo.complemento = this.complemento;
+                _clienteContext.SaveChanges();
+                return true;
+            }
+            catch 
+            {
+                return false;
+             
+            }
+         
         }
 
     }

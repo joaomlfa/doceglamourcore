@@ -22,7 +22,7 @@ namespace DoceGlamourCore.Controllers
         {
 
             ClienteModel clienteModel = new ClienteModel();
-            var cliente = clienteModel.BuscarClientes(_clienteContext, pagina);
+            var cliente = clienteModel.BuscarClientesPaginados(_clienteContext, pagina);
             return View(cliente);
         }
         public IActionResult NovoCliente()
@@ -60,6 +60,29 @@ namespace DoceGlamourCore.Controllers
                 return RedirectToAction("Index", "Cliente");
             }
             
+        }
+        [HttpGet]
+
+        public IActionResult Alterar(int id)
+        {
+            ClienteModel clienteModel = new ClienteModel();
+            clienteModel = clienteModel.BuscarClienteID(_clienteContext, id);
+            return View(clienteModel);
+        }
+        [HttpPost]
+        public IActionResult Alterar(ClienteModel clienteModel)
+        {
+            if (clienteModel.AlterarCliente(_clienteContext))
+            {
+                TempData["verificacao"] = "Alterado";
+                return RedirectToAction("Index", "Cliente");
+            }
+            else
+            {
+                TempData["verificacao"] = "Erro ao alterar";
+                return RedirectToAction("Index", "Cliente");
+            }
+       
         }
     }
 }
