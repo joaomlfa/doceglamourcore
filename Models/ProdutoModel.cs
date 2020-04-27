@@ -16,7 +16,7 @@ namespace DoceGlamourCore.Models
         [Required(ErrorMessage = "Informe um Nome")]
         public string nome { get; set; }
         public string observacao { get; set; }
-        public double valor { get; set; }
+        public decimal valor { get; set; }
         public string categoria { get; set; }
         public string link_foto { get; set; }
         [Required(ErrorMessage = "Informe um Código")]
@@ -24,7 +24,7 @@ namespace DoceGlamourCore.Models
         
         public ICollection<ProdutoPedidoModel>produtoPedidoModels { get; set; }
 
-        public ProdutoModel(int id_produto, string nome, string observacao, double valor, string categoria, string link_foto, string codigo_produto, ICollection<ProdutoPedidoModel> produtoPedidoModels)
+        public ProdutoModel(int id_produto, string nome, string observacao, decimal valor, string categoria, string link_foto, string codigo_produto, ICollection<ProdutoPedidoModel> produtoPedidoModels)
         {
             this.id_produto = id_produto;
             this.nome = nome;
@@ -44,6 +44,10 @@ namespace DoceGlamourCore.Models
         {
             int PageNumber = pagina ?? 1;
             return _produtoContext.produto.ToPagedList(PageNumber, 5);
+        }
+        public List<ProdutoModel> BuscarProdutos(ProdutoContext _produtoContext)
+        {
+            return _produtoContext.produto.ToList();
         }
         public bool AdicionarProduto(ProdutoContext _produtoContext)
         {
@@ -91,6 +95,7 @@ namespace DoceGlamourCore.Models
         {
             try
             {
+
                 _produtoContext.produto.Remove(this.BuscarProdutoID(_produtoContext, id));
                 _produtoContext.SaveChanges();
                 return true;

@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace DoceGlamourCore.Models
 {
-    public class PedidoContext : DbContext
+    public class ProdutoPedidoContext : DbContext
     {
-        public PedidoContext(DbContextOptions<PedidoContext> options) : base(options)
+        public ProdutoPedidoContext(DbContextOptions<ProdutoPedidoContext> options) : base(options)
         {
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProdutoPedidoModel>().HasKey(sc => new { sc.codigo_pedido, sc.codigo_produto });
-           
+
             modelBuilder.Entity<ProdutoPedidoModel>().HasOne(op => op.PedidoModel)
                                                      .WithMany(op => op.produto_pedido)
                                                      .HasForeignKey(op => op.codigo_pedido)
@@ -31,9 +31,14 @@ namespace DoceGlamourCore.Models
 
         }
         public DbSet<PedidoModel> pedido { get; set; }
-        public DbSet<ClienteModel>cliente{ get; set; }
         public DbSet<ProdutoPedidoModel> produto_pedido { get; set; }
-        public DbSet<ProdutoModel>produto { get; set; }
+        public DbSet<ProdutoModel> produto { get; set; }
     }
 }
+
+
+
+
+
+
 

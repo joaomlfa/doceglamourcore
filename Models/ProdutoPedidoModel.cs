@@ -11,13 +11,13 @@ namespace DoceGlamourCore.Models
     {
         
         public int codigo_pedido { get; set; }
-        [ForeignKey("codigo_pedido")]
+  
         public PedidoModel PedidoModel { get; set; }
-        public int id_produto { get; set; }
-        [ForeignKey ("id_produto")]
+        public int codigo_produto { get; set; }
+
         public ProdutoModel ProdutoModel { get; set; }
         public double quantidade { get; set; }
-        public double valor_final { get; set; }
+        public decimal valor_final { get; set; }
         
     }
 }

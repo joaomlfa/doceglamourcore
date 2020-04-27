@@ -14,7 +14,7 @@ namespace DoceGlamourCore.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProdutoPedidoModel>().HasKey(sc => new { sc.codigo_pedido, sc.id_produto });
+            modelBuilder.Entity<ProdutoPedidoModel>().HasKey(sc => new { sc.codigo_pedido, sc.codigo_produto });
 
         }
         public DbSet<ClienteModel> cliente { get; set; }

@@ -15,6 +15,81 @@
 
     <main class="col-md-10 ml-sm-auto col-lg-10 ml-auto px-4">
         <div class="d-flex justify-content-between align-items-center mt-4  pb-2 mb-3">
+
+
+            @{
+                try
+                {
+                    var errormessage = TempData["Verificacao"].ToString();
+
+                    if (errormessage.Equals("Pedido Cadastrado com Sucesso!!!"))
+                    {
+
+
+
+                        <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Feito!</strong> Pedido Cadastrado com Sucesso!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                    }
+                    else if (errormessage.Equals("Erro Ao Inserir Pedido Tente Novamente"))
+                    {
+
+                        <div class="alert alert-danger alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Opa!</strong>Erro ao Cadastrar Pedido - Por Favor Tente Novamente!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+
+                    }
+                    else if (errormessage.Equals("Pedido Excluido"))
+                    {
+                        <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Feito!</strong> Pedido Excluído com Sucesso!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                    else if (errormessage.Equals("Erro ao excluir Pedido"))
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Opa!</strong>Erro ao Excluir Pedido - Por Favor Tente Novamente!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                    else if (errormessage.Equals("Alterado"))
+                    {
+                        <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Feito!</strong> Pedido Alterado com Sucesso!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                    else if (errormessage.Equals("Erro ao alterar"))
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show fixed-bottom" role="alert">
+                            <strong>Opa!</strong>Erro ao Alterar Pedido - Por Favor Tente Novamente!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                }
+                catch
+                {
+
+
+                }
+            }
             <div>
                 <a asp-action="AdicionarPedido" class="btn btn-primary btn-sm " id="novopedido">Novo Pedido</a>
             </div>

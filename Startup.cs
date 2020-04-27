@@ -44,6 +44,7 @@ namespace doceglamour
             services.AddEntityFrameworkNpgsql().AddDbContext<ClienteContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
             services.AddEntityFrameworkNpgsql().AddDbContext<ProdutoContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
             services.AddEntityFrameworkNpgsql().AddDbContext<PedidoContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
+            services.AddEntityFrameworkNpgsql().AddDbContext<ProdutoPedidoContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
 
 
         }
