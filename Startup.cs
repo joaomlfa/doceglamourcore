@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using DoceGlamourCore.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace doceglamour
 {
@@ -29,7 +31,12 @@ namespace doceglamour
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                options.JsonSerializerOptions.WriteIndented = true;
+
+            });
             services.AddControllersWithViews();
             services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

@@ -5,3 +5,44 @@
 main{
   
 }
+#quantidade{
+    margin-top: 32px;
+}
+#AdicionarProduto{
+    margin-top: 32px;
+}
+#desconto{
+    float:left;
+    margin-top: 25px;
+}
+#valordesconto{
+    float:left;
+    padding-left: 5px;
+    margin-top: 20px;
+}
+#valor {
+    float: left;
+    margin-top: 25px;
+}
+
+#valortotal {
+    float: left;
+    padding-left: 5px;
+    margin-top: 20px;
+}
+#sinal {
+    float: left;
+    margin-top: 25px;
+}
+
+#valorsinal {
+    float: left;
+    padding-left: 5px;
+    margin-top: 20px;
+}
+
+#enviarpedido {
+    float: left;
+    padding-left: 5px;
+    margin-top: 20px;
+}

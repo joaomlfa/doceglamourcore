@@ -28,7 +28,9 @@ namespace DoceGlamourCore.Models
         public string obs { get; set; }
         public string status { get; set; }
         [ForeignKey("codigo_cliente")]
+
         public ClienteModel cliente { get; set; }
+        
 
         public ICollection<ProdutoPedidoModel> produto_pedido { get; set; }
 

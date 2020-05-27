@@ -12,18 +12,25 @@
     <title>Novo Pedido</title>
     <link href="~/css/Menu.css" rel="stylesheet" />
     <link href="~/css/AdicionarPedido.css" rel="stylesheet" />
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/CadastrarPedido.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
 </head>
 <body>
 
     <main class="col-md-9 ml-sm-auto col-lg-10 ml-auto px-4">
         <div class="d-flex justify-content-between align-items-center mt-4  pb-2 mb-3">
             <div class="container">
-                <form asp-controller="Pedido" asp-action="AdicionarPedido">
+                <form asp-controller="Pedido" asp-action="AdicionarPedido" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="cliete">Cliente</label>
+                            <label for="cliente">Cliente</label>
                             <input type="text" class="form-control" id="cliente">
+                            <input asp-for="cliente" id="clienteJSON" style="">
                         </div>
                         <div class="form-group col-md-1" s>
                             <a class="nav-link" data-toggle="modal" data-target="#modalExemplo" id="buscarCliente">
@@ -42,42 +49,51 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="table-responsive">
-                                                <table class="table table-striped table-sm">
+                                                <table class="table table-striped table-sm" id="tabelaCliente">
                                                     <thead>
                                                         <tr>
-                                                            <th>#</th>
+                                                            <th>Código</th>
                                                             <th>Nome </th>
                                                             <th>Telefone</th>
                                                             <th>CPF/CNPJ</th>
-                                                            <th>Cidade</th>
+
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @{
-                                                            int contador = 1;
+                                                        @try
+                                                        {
+                                                           
+                                                                int contador = 1;
+                                                            
+
+                                                            foreach (ClienteModel cliente in clientes)
+                                                            {
+
+                                                                <tr>
+                                                                    <td id="codigoCliente">@cliente.codigo_cliente</td>
+                                                                    <td style="display:none">@contador</td>
+                                                                    <td id="nomeCliente">@cliente.nome</td>
+                                                                    <td>@cliente.telefone</td>
+                                                                    <td>@cliente.cnpj_cpf</td>
+
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary btn-sm" onclick="AdicionarCliente(@contador)">Selecionar</button>
+
+                                                                    </td>
+                                                                    @{
+                                                                        contador++;
+                                                                    }
+                                                                </tr>
+
+                                                            }
                                                         }
-                                                        @foreach (ClienteModel cliente in clientes)
+                                                        catch
                                                         {
 
-                                                            <tr>
-
-                                                                <td>@contador</td>
-                                                                <td>@cliente.nome</td>
-                                                                <td>@cliente.telefone</td>
-                                                                <td>@cliente.cnpj_cpf</td>
-                                                                <td>@cliente.cidade</td>
-                                                                <td style="display:none" id="@contador">@cliente.codigo_cliente</td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-primary btn-sm" onclick="AdicionarCliente(@contador)">Selecionar</button>
-
-                                                                </td>
-                                                                @{
-                                                                    contador++;
-                                                                }
-                                                            </tr>
 
                                                         }
+
                                                     </tbody>
 
                                                 </table>
@@ -93,20 +109,20 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="tema">Tema:</label>
-                            <input type="text" class="form-control" id="tema">
+                            <input asp-for="tema" type="text" class="form-control" id="tema">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="crianca">Nome da Criança:</label>
-                            <input type="text" class="form-control" id="crianca">
+                            <input asp-for="nome_crianca" type="text" class="form-control" id="crianca">
                         </div>
                         <div class="form-group col-md-1">
 
                         </div>
                         <div class="form-group col-md-2">
                             <label for="idade">Idade da Criança:</label>
-                            <input type="text" class="form-control" id="idade">
+                            <input asp-for="idadecrianca" type="text" class="form-control" id="idade">
                         </div>
                     </div>
                     <div class="form-row">
@@ -124,48 +140,101 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="produtos">Produtos</label>
-                            <select type="" class="form-control" id="produtos">
-                                @{
-                                    foreach (var produto in produtos)
-                                    {
-                                        <option>@produto.nome</option>
-                                    }
-
-                                }
-
-                            </select>
-
+                            <label for="obs">Observações:</label>
+                            <textarea asp-for="obs" class="form-control" id="obs"></textarea>
                         </div>
                         <div class="form-group col-md-1">
 
                         </div>
                         <div class="form-group col-md-2">
-                            <button class="btn btn-primary">Adicionar Produto</button>
+                            <label for="status">Status:</label>
+                            <select type="" class="form-control" id="status" asp-for="status">
+
+                                <option value="Aberto">Aberto</option>
+                                <option value="Fechado">Fechado</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="produtos">Produtos</label>
+                            <select type="" class="form-control" id="produtos">
+                                @try
+                                {
+                                    foreach (var produto in produtos)
+                                    {
+                                        <option value="@produto.id_produto">@produto.nome</option>
+                                    }
+
+                                }
+                                catch
+                                {
+
+
+                                }
+
+
+                            </select>
 
                         </div>
+                        <div class="form-group col-md-1">
+                            <input type="text" class="form-control" id="quantidade" value="" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button type="button" class="btn btn-primary" onclick="Verifica()" id="AdicionarProduto">Adicionar Produto</button>
+
+                        </div>
+
                     </div>
 
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-striped table-sm" id="tabelaProduto">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+
                                     <th>Código </th>
                                     <th>Nome</th>
                                     <th>Valor</th>
                                     <th>Quantidade</th>
 
+
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                </tr>
+
                             </tbody>
 
 
 
                         </table>
                     </div>
+
+
+                    <div id="valor">Valor Total:</div>
+                    <div id="valortotal" class="col-2">
+                        <input type="text" class="form-control" id="ValorTotalInput" disabled />
+                    </div>
+                    <div id="desconto">Desconto R$:</div>
+                    <div id="valordesconto" class="col-2">
+                        <input type="text" class="form-control" id="DescontoInput" onkeyup="somenteNumeros(this)" />
+                    </div>
+                    <div id="sinal">Sinal R$:</div>
+                    <div id="valorsinal" class="col-2">
+                        <input type="text" class="form-control" id="ValorSinalInput" onkeyup="somenteNumeros(this)" />
+                    </div>
+
+
+
+
+                    <div id="enviarPedido" class="col-2">
+                        <button type="button" class="btn btn-primary" id="salvarpedido">Salvar Pedido</button>
+                    </div>
+
 
                 </form>
 
@@ -174,5 +243,11 @@
     </main>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/js/CadastrarPedido.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+
+
 </body>
 </html>

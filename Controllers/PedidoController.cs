@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DoceGlamourCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DoceGlamourCore.Controllers
 {
@@ -27,6 +29,7 @@ namespace DoceGlamourCore.Controllers
             return View(pedidos);
 
         }
+        [HttpGet]
         public IActionResult AdicionarPedido(int? pagina)
         {
 
@@ -37,6 +40,12 @@ namespace DoceGlamourCore.Controllers
             ViewBag.clientes = cliente;
             ViewBag.produtos = produtos;
             return View();
+        }
+        [HttpPost]
+        public JsonResult AdicionarPedido(String  pedido)
+        {
+            
+            return Json(pedido);
         }
         public IActionResult Excluir(int id)
         {
@@ -53,6 +62,20 @@ namespace DoceGlamourCore.Controllers
                 return RedirectToAction("Index", "Pedido");
             }
             
+        }
+        [HttpGet]
+        public JsonResult BuscarProdutoID()
+        {
+            var produto = _produtoContext.produto.Where(op => op.id_produto == 17).FirstOrDefault();
+            var jsonProduto = JsonSerializer.Serialize(produto);
+            return Json(jsonProduto);
+        }
+        public JsonResult BuscarClienteID()
+        {
+            var cliente = _clienteContext.cliente.Where(op => op.codigo_cliente == 7).FirstOrDefault();
+            var jsonCliente = JsonSerializer.Serialize(cliente);
+            
+            return Json(jsonCliente);
         }
     }
 }
