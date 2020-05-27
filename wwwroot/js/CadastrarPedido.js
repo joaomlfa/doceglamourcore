@@ -21,11 +21,14 @@ function AdicionarCliente(contador) {
 
             }
         });
-        $(function(){
+        $(function () {
+            var idCliente = 3;
+
             $.ajax({
                 contentType: "application/json",
                 type: "GET",
                 url: "/Pedido/BuscarClienteID",
+                data: "{'idCliente':'" + idClienten + "'}",
                 dataType: "json",
                 success:
                     function (data) {
