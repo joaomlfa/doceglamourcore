@@ -22,20 +22,16 @@ function AdicionarCliente(contador) {
             }
         });
         $(function () {
-            var idCliente = 3;
+            var idCliente = $("#clienteID").val();
 
             $.ajax({
                 contentType: "application/json",
                 type: "GET",
                 url: "/Pedido/BuscarClienteID",
                 data: "{'idCliente':'" + idClienten + "'}",
-                dataType: "json",
                 success:
                     function (data) {
-                        data = JSON.parse(data);
-                        var clienteSTRING = JSON.stringify(data);
-                        clienteJSON = clienteSTRING.replace("\n", "*");
-                        $("#clienteJSON").val(clienteJSON);
+                        console.log(data);
                         
 
                 }
