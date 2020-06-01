@@ -70,9 +70,9 @@ namespace DoceGlamourCore.Controllers
             var jsonProduto = JsonSerializer.Serialize(produto);
             return Json(jsonProduto);
         }
-        public JsonResult BuscarClienteID()
+        public JsonResult BuscarClienteID(int idCliente)
         {
-            var cliente = _clienteContext.cliente.Where(op => op.codigo_cliente == 7).FirstOrDefault();
+            var cliente = _clienteContext.cliente.Where(op => op.codigo_cliente == idCliente).FirstOrDefault();
             var jsonCliente = JsonSerializer.Serialize(cliente);
             
             return Json(jsonCliente);
