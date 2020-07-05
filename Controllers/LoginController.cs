@@ -10,16 +10,19 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using DoceGlamourCore.Libraries.LoginUser;
 
 namespace DoceGlamourCore.Controllers
 {
     public class LoginController : Controller
     {
         private readonly UsuarioContext _usuarioContext;
+        private LoginUser _loginUser;
 
-        public LoginController(UsuarioContext usuarioContext)
+        public LoginController(UsuarioContext usuarioContext, LoginUser loginUser)
         {
             this._usuarioContext = usuarioContext;
+            this._loginUser = loginUser;
         }
         [HttpGet]
         public IActionResult Index(int? args)
@@ -37,10 +40,20 @@ namespace DoceGlamourCore.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Login()
+        #nullable enable
+        public IActionResult Login(string? mensagem)
         {
-    
-            return View();
+            if (mensagem == null)
+            {
+                
+                return View();
+            }
+            else
+            {
+                TempData["ErrorLogin"] = "Efetue Login para Acessar.";
+                return View();
+            }
+            
         }
         [HttpPost]
 
@@ -49,8 +62,7 @@ namespace DoceGlamourCore.Controllers
         {
             if (usuarioModel.ValidarUsuario( _usuarioContext, usuarioModel.emailUsuario, usuarioModel.senha))
             {
-
-                LoginAutentication(usuarioModel);
+                _loginUser.Login(usuarioModel);               
                 return RedirectToAction("Index", "Menu");
             }
             else
@@ -61,18 +73,7 @@ namespace DoceGlamourCore.Controllers
            
         }
 
-        public async void LoginAutentication(UsuarioModel usuarioModel)
-        {
-            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuarioModel.usuario));
-            identity.AddClaim(new Claim(ClaimTypes.Name, usuarioModel.nomeUsuario));
-            var principal = new ClaimsPrincipal(identity);
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-            HttpContext.Session.SetString("IdUsuarioLogado", usuarioModel.idUsuario.ToString());
-            HttpContext.Session.SetString("NomeUsuarioLogado", usuarioModel.nomeUsuario);
-            HttpContext.Session.SetString("senha", usuarioModel.senha);
-            
-        }
+        
         
     }
 }

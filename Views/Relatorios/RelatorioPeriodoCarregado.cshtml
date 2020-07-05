@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = "_MenuLayout";
+    List<PedidoModel> pedidos = ViewBag.pedidos;
+    decimal valorTotalPedidos = 0;
+}
+<!DOCTYPE html>
+<head>
+    <title>Relatório por Período</title>
+
+</head>
+<body>
+    <main class="col-md-10 ml-sm-auto col-lg-10 ml-auto px-4">
+
+        <div class="container">
+
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+
+                        <th scope="col">Código</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Data Pedido</th>
+                        <th scope="col">Data Entrega</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var pedido in pedidos)
+                    {
+                        <tr>
+                            <td>@pedido.codigo_pedido</td>
+                            <td>@pedido.cliente.nome</td>
+                            <td>@pedido.valor_total</td>
+                            <td>@pedido.data_pedido.ToShortDateString()</td>
+                            <td>@pedido.data_entrega.ToShortDateString()</td>
+                            @{
+                                valorTotalPedidos = valorTotalPedidos + pedido.valor_total;
+                            }
+
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
+            <div class="container">
+                <div class="row col-lg-2">
+                    <label for="valorTotalPedidos">Valor Total Pedidos</label>
+                    <input type="text" class="form-control" id="valorTotalPedidos" value=@valorTotalPedidos>
+                </div>
+                
+            </div>
+
+        </div>
+            
+    </main>
+   
+</body>

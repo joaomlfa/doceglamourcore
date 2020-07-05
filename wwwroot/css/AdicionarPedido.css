@@ -1,25 +1,30 @@
-﻿#buscarCliente{
+﻿#buscarCliente {
     padding-top: 40px;
     padding-left: 0;
 }
-main{
-  
+
+main {
 }
-#quantidade{
+
+#quantidade {
     margin-top: 32px;
 }
-#AdicionarProduto{
+
+#AdicionarProduto {
     margin-top: 32px;
 }
-#desconto{
-    float:left;
+
+#desconto {
+    float: left;
     margin-top: 25px;
 }
-#valordesconto{
-    float:left;
+
+#valordesconto {
+    float: left;
     padding-left: 5px;
     margin-top: 20px;
 }
+
 #valor {
     float: left;
     margin-top: 25px;
@@ -30,6 +35,7 @@ main{
     padding-left: 5px;
     margin-top: 20px;
 }
+
 #sinal {
     float: left;
     margin-top: 25px;
@@ -41,8 +47,18 @@ main{
     margin-top: 20px;
 }
 
-#enviarpedido {
+#datasinal {
+    float: left;
+    margin-top: 25px;
+}
+
+#dataSinalDiv {
     float: left;
     padding-left: 5px;
     margin-top: 20px;
 }
+
+#salvarpedido, #cancelarpedido {
+    margin-top: 50px;
+}
+

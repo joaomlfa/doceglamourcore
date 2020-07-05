@@ -18,18 +18,48 @@
         </div>
         <div id="Divlogin" class="col-lg-4 col-md-4 col-sm-4 col-sm-4 col-xl-4">
             <label id="Labellogin">Login</label>
-            @{ 
+            @{
                 try
                 {
                     var errorMessage = TempData["ErrorLogin"].ToString();
-                    <h5 class="text-danger">@errorMessage</h5>
+
+
+                    if (errorMessage.Equals("Email ou Senha inválido!"))
+                    {
+                        <h5 class="text-danger">@errorMessage</h5>
+                    }
+                    else if (errorMessage.Equals("Efetue Login para Acessar."))
+                    {
+                        <h5 class="text-danger">@errorMessage</h5>
+                    }
+
+
+
                 }
                 catch
                 {
 
                 }
+                try
+                {
+                    var cadastroMessage = TempData["CadastroFeito"].ToString();
+                    if (cadastroMessage.Equals("Usuário Cadastrado Efetue Login."))
+                    {
+                        <h5 class="text-success">@cadastroMessage</h5>
+                    }
+                    else if(cadastroMessage.Equals("Erro ao Cadastrar Tente Novamente."))
+                    {
+                        <h5 class="text-danger">@cadastroMessage</h5>
+                    }
+
+                }
+                catch
+                {
+
+
+                }
             }
-            <form asp-controller="Login" asp-action="Login" method ="post">
+            <form asp-controller="Login" asp-action="Login" method="post">
                 <div class="form-group">
                     <input type="email" class="form-control" id="exampleInputEmail1" asp-for="emailUsuario" aria-describedby="emailHelp" placeholder="Usuário">
                     <span asp-validation-for="emailUsuario" class="text-danger"></span>
@@ -43,6 +73,11 @@
                     <label class="form-check-label" for="exampleCheck1">Lembrar meus dados?</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Acessar</button>
+                <br />
+                <br />
+                <br />
+                <a class="btn btn-success" href="../Usuario/Index" role="button">Cadastre-Se</a>
+
             </form>
         </div>
 
@@ -50,8 +85,9 @@
 
         </div>
 
-        
+
     </div>
+    <a href="https://br.freepik.com/fotos-vetores-gratis/fundo" id="atribuicao">Fundo foto criado por freepik - br.freepik.com</a>
 </body>
 </html>
 

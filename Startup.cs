@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
+using Microsoft.CodeAnalysis.Options;
+using DoceGlamourCore.Sessao;
+using DoceGlamourCore.Libraries.LoginUser;
 
 namespace doceglamour
 {
@@ -35,25 +38,24 @@ namespace doceglamour
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 options.JsonSerializerOptions.WriteIndented = true;
+               
 
             });
+
+            
             services.AddControllersWithViews();
-            services.AddSession();
+            services.AddMemoryCache();
+            services.AddSession(op => op.IdleTimeout = TimeSpan.FromMinutes(20));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddAuthentication(options =>
-            {
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options => { options.LoginPath = "/Login/Index"; });
-           
+            services.AddHttpContextAccessor();
+            services.AddScoped<Sessao>();
+            services.AddScoped<LoginUser>();
             services.AddEntityFrameworkNpgsql().AddDbContext<UsuarioContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
             services.AddEntityFrameworkNpgsql().AddDbContext<ClienteContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
             services.AddEntityFrameworkNpgsql().AddDbContext<ProdutoContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
             services.AddEntityFrameworkNpgsql().AddDbContext<PedidoContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
             services.AddEntityFrameworkNpgsql().AddDbContext<ProdutoPedidoContext>(options => options.UseNpgsql(Configuration.GetConnectionString("UsuarioDB")));
-
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

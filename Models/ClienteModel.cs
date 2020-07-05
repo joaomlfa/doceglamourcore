@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using X.PagedList;
 
@@ -25,9 +26,10 @@ namespace DoceGlamourCore.Models
         public string cnpj_cpf { get; set; }
         public string uf { get; set; }
         public string cep { get; set; }
+        public bool? excluido { get; set; }
         public ICollection<PedidoModel>  pedido { get; set; }
 
-        public ClienteModel(int codigo_cliente, string nome, string telefone, string rua, string bairro, string cidade, string numero, string complemento, string cnpj_cpf, string uf)
+        public ClienteModel(int codigo_cliente, string nome, string telefone, string rua, string bairro, string cidade, string numero, string complemento, string cnpj_cpf, string uf, bool excluido)
         {
             this.codigo_cliente = codigo_cliente;
             this.nome = nome;
@@ -39,6 +41,7 @@ namespace DoceGlamourCore.Models
             this.complemento = complemento;
             this.cnpj_cpf = cnpj_cpf;
             this.uf = uf;
+            this.excluido = excluido;
         }
 
         public ClienteModel()
@@ -48,12 +51,13 @@ namespace DoceGlamourCore.Models
         public IPagedList<ClienteModel> BuscarClientesPaginados(ClienteContext clienteContext, int? pagina)
         {
             int PageNumber = pagina ?? 1;
-            return clienteContext.cliente.ToPagedList(PageNumber, 15);
+            return clienteContext.cliente.Where(op => op.excluido == false).ToPagedList(PageNumber, 15);
         }
         public Boolean InserirCliente(ClienteContext _clienteContext)
         {
             try
             {
+                this.excluido = false;
                 _clienteContext.Add(this);
                 _clienteContext.SaveChanges();
 
@@ -70,12 +74,14 @@ namespace DoceGlamourCore.Models
         {
             try
             {
-                _clienteContext.Remove(BuscarClienteID(_clienteContext, id));
+                var cliente = _clienteContext.cliente.Where(op => op.codigo_cliente == id).FirstOrDefault();
+                cliente.excluido = true;
                 _clienteContext.SaveChanges();
                 return true;
             }
             catch 
             {
+                
                 return false;
                
             }

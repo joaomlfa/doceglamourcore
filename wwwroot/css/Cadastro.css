@@ -1,0 +1,16 @@
+﻿body {
+    
+    background-image: url('../Free-Candy-Pattern-Vectors.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+#atribuicao{
+    float : right;
+}
+form{
+    margin-top : 200px;
+    margin-left : 200px;
+    margin-right: 200px;
+}

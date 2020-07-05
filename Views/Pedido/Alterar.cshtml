@@ -1,0 +1,254 @@
+﻿@model PedidoModel
+@{
+    Layout = "_MenuLayout";
+    X.PagedList.IPagedList<ClienteModel> clientes = (X.PagedList.IPagedList<ClienteModel>)ViewBag.clientes;
+    List<ProdutoModel> produtos = ViewBag.produtos;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Novo Pedido</title>
+    <link href="~/css/Menu.css" rel="stylesheet" />
+    <link href="~/css/AdicionarPedido.css" rel="stylesheet" />
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/AlterarPedido.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+</head>
+<body> 
+
+    <main class="col-md-9 ml-sm-auto col-lg-10 ml-auto px-4">
+        <div class="d-flex justify-content-between align-items-center mt-4  pb-2 mb-3">
+            <div class="container">
+                <form asp-controller="Pedido" asp-action="Alterar" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="cliente">Cliente</label>
+                            <input type="text" class="form-control" id="cliente">
+                            <input asp-for="clienteJSON" id="clienteJSON" style="display:none">
+                            <input asp-for="codigo_pedido" id="codigoPedido" style="display:none">
+                            <input asp-for="data_pedido" style="display:none" id="data_atual_pedido" type="date" />
+                        </div>
+                        <div class="form-group col-md-1" s>
+                            <a class="nav-link" data-toggle="modal" data-target="#modalExemplo" id="buscarCliente">
+                                <i class="fas fa-search"></i>
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Adicionar Cliente</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-sm" id="tabelaCliente">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Código</th>
+                                                            <th>Nome </th>
+                                                            <th>Telefone</th>
+                                                            <th>CPF/CNPJ</th>
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @try
+                                                        {
+
+                                                            int contador = 1;
+
+
+                                                            foreach (ClienteModel cliente in clientes)
+                                                            {
+
+                                                                <tr>
+                                                                    <td id="codigoCliente">@cliente.codigo_cliente</td>
+                                                                    <td style="display:none">@contador</td>
+                                                                    <td id="nomeCliente">@cliente.nome</td>
+                                                                    <td>@cliente.telefone</td>
+                                                                    <td>@cliente.cnpj_cpf</td>
+
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary btn-sm" onclick="AdicionarCliente(@contador)">Selecionar</button>
+
+                                                                    </td>
+                                                                    @{
+                                                                        contador++;
+                                                                    }
+                                                                </tr>
+
+                                                            }
+                                                        }
+                                                        catch
+                                                        {
+
+
+                                                        }
+
+                                                    </tbody>
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="tema">Tema:</label>
+                            <input asp-for="tema" type="text" class="form-control" id="tema">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="crianca">Nome da Criança:</label>
+                            <input asp-for="nome_crianca" type="text" class="form-control" id="crianca">
+                        </div>
+                        <div class="form-group col-md-1">
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="idade">Idade da Criança:</label>
+                            <input asp-for="idadecrianca" type="text" class="form-control" id="idade">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dataentrega">Data de Entrega:</label>
+                            <input asp-for="data_entrega" type="date" class="form-control" id="dataentrega">
+                        </div>
+                        <div class="form-group col-md-1">
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="taxa">Taxa de Entrega:</label>
+                            <input asp-for="taxa_entrega" type="text" class="form-control" id="taxa" Onkeyup="somenteNumeros(this)">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="obs">Observações:</label>
+                            <textarea asp-for="obs" class="form-control" id="obs"></textarea>
+                        </div>
+                        <div class="form-group col-md-1">
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="status">Status:</label>
+                            <select type="" class="form-control" id="status" asp-for="status">
+
+                                <option value="Aberto">Aberto</option>
+                                <option value="Fechado">Fechado</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="produtos">Produtos</label>
+                            <select type="" class="form-control" id="produtos">
+                                @try
+                                {
+                                    foreach (var produto in produtos)
+                                    {
+                                        <option value="@produto.id_produto">@produto.nome</option>
+                                    }
+
+                                }
+                                catch
+                                {
+
+
+                                }
+
+
+                            </select>
+
+                        </div>
+                        <div class="form-group col-md-1">
+                            <input type="text" class="form-control" id="quantidade" value="" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button type="button" class="btn btn-primary" onclick="Verifica()" id="AdicionarProduto">Adicionar Produto</button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm" id="tabelaProduto">
+                            <thead>
+                                <tr>
+
+                                    <th>Código </th>
+                                    <th>Nome</th>
+                                    <th>Valor</th>
+                                    <th>Quantidade</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                            </tbody>
+
+
+
+                        </table>
+                    </div>
+
+
+                    <div id="valor">Valor Total:</div>
+                    <div id="valortotal" class="col-2">
+                        <input asp-for="valor_total" type="text" class="form-control" id="ValorTotalInput" readonly />
+                    </div>
+                    <div id="desconto">Desconto R$:</div>
+                    <div id="valordesconto" class="col-2">
+                        <input asp-for="desconto" type="text" class="form-control" id="DescontoInput" onkeyup="somenteNumeros(this)" />
+                    </div>
+                    <div id="sinal">Sinal R$:</div>
+                    <div id="valorsinal" class="col-2">
+                        <input asp-for="valor_sinal" type="text" class="form-control" id="ValorSinalInput" onkeyup="somenteNumeros(this)" />
+                    </div>
+                    <div id="datasinal">Data do Sinal R$:</div>
+                    <div id="dataSinalDiv" class="col-2">
+                        <input asp-for="data_sinal" type="date" class="form-control" id="DataSinalInput" />
+                    </div>
+                    <input type="text" id="produtoPedidoJSON" asp-for="produtoPedidoJSON" style="display:none">
+
+                    <button type="submit" class="btn btn-primary" id="salvarpedido">Salvar Pedido</button>
+                    <a class="btn btn-danger" href="../../Pedido/Index" id="cancelarpedido" role="button">Cancelar Pedido</a>
+
+                </form>
+
+            </div>
+        </div>
+    </main>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/AlterarPedido.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+
+
+</body>
+</html>

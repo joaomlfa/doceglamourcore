@@ -1,0 +1,57 @@
+﻿@model RelatorioModel
+@{
+    Layout = "_MenuLayout";
+    List<ProdutoPedidoModel> produtosPedido = ViewBag.produtosPedido;
+    List<ProdutoModel> produtosObjeto = ViewBag.produtos;
+}
+<!DOCTYPE html>
+<head>
+    <title>Relatório de Produtos Mais Vendidos</title>
+    <link href="~/css/ProdutosMaisVendidos.css" rel="stylesheet"/>
+
+</head>
+<body>
+    <main class="col-md-10 ml-sm-auto col-lg-10 ml-auto px-4">
+
+        @if (produtosObjeto == null || produtosPedido == null)
+        {
+            <div class="alert alert-danger" role="alert">
+                Nenhum Poduto Cadastrado ou Vendidor!!!
+            </div>
+        }
+        else
+        {
+            <div id="labelPrincipal">
+                <label id="produtosmaisvendidos">Produtos Mais Vendidos</label>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Quantidade Vendida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var produto in produtosPedido)
+                    {
+                        <tr>
+                            <td>@produto.codigo_produto</td>
+                            @{
+                                int index = produtosObjeto.FindIndex(op => op.id_produto == produto.codigo_produto);
+                                <td>@produtosObjeto[index].nome</td>
+                            }
+                            <td>@produto.quantidade</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        }
+
+
+    </main>
+   
+</body>

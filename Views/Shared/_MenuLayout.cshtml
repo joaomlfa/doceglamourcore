@@ -9,6 +9,9 @@
     <link href="~/css/PagedList.css" rel="stylesheet" />
     <link href="~/css/Menu.css" rel="stylesheet" />
     <link href="~/css/Main.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/bcdf4fbfba.js" crossorigin="anonymous"></script>
+
 
 </head>
 <body>
@@ -17,7 +20,7 @@
         <input class="form-control form-control-dark w-100" type="text" placeholder="Procurar" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Sair</a>
+                <a class="nav-link" href="../../Menu/Sair">Sair</a>
             </li>
         </ul>
     </nav>
@@ -28,22 +31,22 @@
 
                 <ul class=" nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="../Menu/Index">
+                        <a class="nav-link active" href="../../Menu/Index">
                             <i class="fas fa-home"></i>Início
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Cliente/Index">
+                        <a class="nav-link" href="../../Cliente/Index">
                             <i class="fas fa-user-plus"></i>Cliente
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="../Produto/Index">
+                        <a class="nav-link" href="../../Produto/Index">
                             <i class="fas fa-box-open"></i>Produto
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Pedido/Index">
+                        <a class="nav-link" href="../../Pedido/Index">
                             <i class="fas fa-cart-arrow-down"></i>Pedido
                         </a>
                     </li>
@@ -53,8 +56,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-scroll"></i>Relatório
+                        <a class="nav-link" href="../../Relatorios/Index">
+                            <i class="fas fa-chart-line"></i>Relatórios
                         </a>
                     </li>
                 </ul>
@@ -70,7 +73,8 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/Bootstrap 4/js/bootstrap.min.js"></script>
-    <script src="~/js/Action.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

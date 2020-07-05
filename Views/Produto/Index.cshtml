@@ -9,6 +9,7 @@
 <head>
     <title>Menu Principal</title>
     <link href="~/css/MenuCliente.css" rel="stylesheet" />
+    <script src="~/js/IndexProduto.js"></script>
 
 </head>
 <body>
@@ -104,29 +105,27 @@
         {
 
             <div class="table-responsive">
-                <table class="table table-striped table-sm">
+                <table class="table table-striped table-sm" id="tabelaProdutos">
                     <thead>
                         <tr>
-                            <th>#</th>
+
                             <th>Código </th>
                             <th>Nome</th>
                             <th>Valor</th>
                             <th>Categoria</th>
                             <th>Observação</th>
                             <th>Foto</th>
-                            <th></th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @{
-                            int contador = 1;
-                        }
+
                         @foreach (ProdutoModel produto in Model)
                         {
 
                             <tr>
 
-                                <td>@contador</td>
+
                                 <td>@produto.codigo_produto</td>
                                 <td>@produto.nome</td>
                                 <td>@produto.valor</td>
@@ -146,11 +145,9 @@
                                 </td>
                                 <td>
                                     <a asp-action="Alterar" asp-route-id="@produto.id_produto" class=" btn btn-primary btn-sm ">Atualizar</a>
-                                    <a asp-action="Excluir" asp-route-id="@produto.id_produto" class="btn btn-danger btn-sm excluirCliente">Excluir</a>
+                                    <a asp-action="Excluir" asp-route-id="@produto.id_produto" class="btn btn-danger btn-sm excluirProduto">Excluir</a>
                                 </td>
-                                @{
-                                    contador++;
-                                }
+
                             </tr>
 
                         }
@@ -167,6 +164,6 @@
         }
 
     </main>
-
+    <script src="~/js/IndexProduto.js"></script>
 </body>
 </html>

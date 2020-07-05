@@ -1,0 +1,33 @@
+﻿@model RelatorioModel
+@{
+    Layout = "_MenuLayout";
+}
+<!DOCTYPE html>
+<head>
+    <title>Relatório Grafico de Vendas</title>
+    <link href="~/css/RelatorioGrafico.css" rel="stylesheet"/>
+
+</head>
+<body>
+    <main class="col-md-10 ml-sm-auto col-lg-10 ml-auto px-4">
+
+        <div class="container">
+            <div class="row col-lg-4" id="divOpcoes">
+                <select class="form-control" id="selectAno">
+                    <option value="2019">2019</option>
+                    <option value="2020" selected >2020</option>
+                </select>
+                <button type="button" class="btn btn-primary" onclick="CarregarGrafico()" id="botaoRelatorio">Gerar Relatório Gráfico</button>
+            </div>
+
+            <div class="row" id="divGrafico">
+                <canvas class="line-chart" id="canvasGrafico"></canvas>
+            </div>
+
+
+
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="~/js/RelatorioGraficoVendas.js"></script>
+</body>

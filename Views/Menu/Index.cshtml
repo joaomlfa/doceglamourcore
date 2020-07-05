@@ -7,24 +7,26 @@
 <html>
 <head>
     <title>Menu Principal</title>
-    <link href="~/css/Menu.css" rel="stylesheet" />
+    <link href="~/css/Menu.css" rel="stylesheet" />   
+    <script src="~/js/Menu.js"></script>
+    
 
 </head>
 <body>
 
     <main class="col-md-9 ml-sm-auto col-lg-10 ml-auto px-4">
         <div class="d-flex justify-content-between align-items-center mt-4  pb-2 mb-3">
-           <h2>Pedidos em Aberto</h2>
+            <h2>Pedidos em Aberto</h2>
         </div>
 
         @if (Model.Count() > 0)
         {
-
+            
             <div class="table-responsive">
-                <table class="table table-striped table-sm">
+                <table class="table table-striped table-sm" id="pedidosAbertos">
                     <thead>
                         <tr>
-                            <th>#</th>
+
                             <th>Código </th>
                             <th>Cliente</th>
                             <th>Tema</th>
@@ -36,32 +38,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @{
-                            int contador = 1;
-                        }
+
                         @foreach (PedidoModel pedido in Model)
                         {
 
                             <tr>
 
-                                <td>@contador</td>
+
                                 <td>@pedido.codigo_pedido </td>
-                                <td>@pedido.cliente.nome</td>
+                                @if (pedido.cliente == null)
+                                {
+                                    <td>SEM CLIENTE</td>
+                                }
+                                else
+                                {
+                                    <td>@pedido.cliente.nome</td>
+                                }
+
                                 <td>@pedido.tema</td>
                                 <td>@pedido.nome_crianca</td>
                                 <td>@pedido.valor_total</td>
-                                <td>@pedido.data_entrega</td>
+                                <td>@pedido.data_entrega.ToShortDateString()</td>
                                 <td>@pedido.valor_sinal</td>
-                                <td>@pedido.data_sinal</td>
+                                <td>@pedido.data_sinal.ToShortDateString()</td>
 
-                               
-                                @{
-                                    contador++;
-                                }
                             </tr>
 
-                        }
 
+                        }
                 </table>
                 @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina }))
             </div>
@@ -75,6 +79,8 @@
 
 
     </main>
-
+    <script src="~/js/Menu.js"></script>
+    
+    
 </body>
 </html>

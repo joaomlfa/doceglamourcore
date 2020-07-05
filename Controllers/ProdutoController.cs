@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DoceGlamourCore.Libraries.LoginUser;
 using DoceGlamourCore.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,21 +11,45 @@ namespace DoceGlamourCore.Controllers
     public class ProdutoController : Controller
     {
         private readonly ProdutoContext _produtoContext;
+        private LoginUser _loginUser;
 
-        public ProdutoController(ProdutoContext produtoContext)
+        public ProdutoController(ProdutoContext produtoContext, LoginUser loginUser)
         {
             this._produtoContext = produtoContext;
+            this._loginUser = loginUser;
         }
 
         public IActionResult Index(int? pagina)
         {
-            ProdutoModel produtoModel = new ProdutoModel();
-            var produtos = produtoModel.BuscarProdutosPaginados( _produtoContext, pagina);
-            return View(produtos);
+            UsuarioModel usuario = _loginUser.GetUser();
+            if (usuario != null)
+            {
+                ProdutoModel produtoModel = new ProdutoModel();
+                var produtos = produtoModel.BuscarProdutosPaginados(_produtoContext, pagina);
+                return View(produtos);
+            }
+            else
+            {
+                var msg = "Efetue Login para Acessar.";
+                return RedirectToAction("Login", "Login", new { mensagem = msg });
+            }
+           
         }
         public IActionResult AdicionarProduto()
         {
-            return View();
+
+            UsuarioModel usuario = _loginUser.GetUser();
+            if (usuario != null)
+            {
+                return View();
+            }
+            else
+            {
+                var msg = "Efetue Login para Acessar.";
+                return RedirectToAction("Login", "Login", new { mensagem = msg });
+            }
+
+           
         }
         [HttpPost]
         public IActionResult AdicionarProduto(ProdutoModel produtoModel)
@@ -42,9 +67,20 @@ namespace DoceGlamourCore.Controllers
         [HttpGet]
         public IActionResult Alterar(int id)
         {
-            ProdutoModel produto = new ProdutoModel();
-            produto = produto.BuscarProdutoID(_produtoContext, id);
-            return View(produto);
+
+            UsuarioModel usuario = _loginUser.GetUser();
+            if (usuario != null)
+            {
+                ProdutoModel produto = new ProdutoModel();
+                produto = produto.BuscarProdutoID(_produtoContext, id);
+                return View(produto);
+            }
+            else
+            {
+                var msg = "Efetue Login para Acessar.";
+                return RedirectToAction("Login", "Login", new { mensagem = msg });
+            }
+           
         }
         [HttpPost]
         public IActionResult Alterar(ProdutoModel produto)
@@ -61,16 +97,32 @@ namespace DoceGlamourCore.Controllers
         }
         public IActionResult Excluir(int id)
         {
-            ProdutoModel produtoModel = new ProdutoModel();
-            if(produtoModel.ExcluirProduto(_produtoContext, id)){
-                TempData["Verificacao"] = "Produto Excluido";
-                return RedirectToAction("Index", "Produto");
+            UsuarioModel usuario = _loginUser.GetUser();
+            if (usuario != null)
+            {
+                ProdutoModel produtoModel = new ProdutoModel();
+                if (produtoModel.ExcluirProduto(_produtoContext, id))
+                {
+                    TempData["Verificacao"] = "Produto Excluido";
+                    return RedirectToAction("Index", "Produto");
+                }
+                else
+                {
+                    TempData["Verificacao"] = "Erro ao excluir Produto";
+                    return RedirectToAction("Index", "Produto");
+                }
             }
             else
             {
-                TempData["Verificacao"] = "Erro ao excluir Produto";
-                return RedirectToAction("Index", "Produto");
+                var msg = "Efetue Login para Acessar.";
+                return RedirectToAction("Login", "Login", new { mensagem = msg });
             }
+
+            
+        }
+        public IActionResult CancelarProduto()
+        {
+            return RedirectToAction("Index", "Produto");
         }
     }
 }

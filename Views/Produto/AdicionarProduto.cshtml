@@ -31,31 +31,32 @@
                         <div class="form-group col-md-4">
                             <label for="valor">Preço</label>
                             <input asp-for="valor" type="text" class="form-control" id="valor" placeholder="19,90">
-                           
+
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
-                    
+
                         <div class="form-group col-md-4">
                             <label for="categoria">Categoria</label>
                             <select asp-for="categoria" id="categoria" class="form-control">
                                 <option selected value="">Selecione</option>
                                 <option value="Alimentício">Alimentício</option>
                                 <option value="Papelaria">Papelaria</option>
-                               
+
                             </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="link_foto">Link da Foto</label>
                             <input asp-for="link_foto" type="text" class="form-control" id="link_foto">
                         </div>
-                        <div class="form-group col-md-4" >
+                        <div class="form-group col-md-4">
                             <label for="observacao">Observação</label>
                             <textarea class="form-control" id="observacao" rows="3" asp-for="observacao"></textarea>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a class="btn btn-danger" href="../../Produto/Index" id="cancelarproduto" role="button">Cancelar</a>
                 </form>
             </div>
         </div>

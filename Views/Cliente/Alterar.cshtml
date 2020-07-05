@@ -16,7 +16,7 @@
         <div class="d-flex justify-content-between align-items-center mt-4  pb-2 mb-3">
             <div class="container">
                 <form asp-controller="Cliente" asp-action="Alterar" method="post">
-                    <input asp-for="codigo_cliente" type="hidden"/>
+                    <input asp-for="codigo_cliente" type="hidden" />
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="nomeCliente">Nome</label>
@@ -96,6 +96,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a class="btn btn-danger" href="../../Cliente/Index" id="cancelarcliente" role="button">Cancelar</a>
                 </form>
             </div>
         </div>

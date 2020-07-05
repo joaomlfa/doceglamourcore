@@ -21,10 +21,11 @@ namespace DoceGlamourCore.Models
         public string link_foto { get; set; }
         [Required(ErrorMessage = "Informe um Código")]
         public string codigo_produto { get; set; }
+        public bool? excluido { get; set; }
         
         public ICollection<ProdutoPedidoModel>produtoPedidoModels { get; set; }
 
-        public ProdutoModel(int id_produto, string nome, string observacao, decimal valor, string categoria, string link_foto, string codigo_produto, ICollection<ProdutoPedidoModel> produtoPedidoModels)
+        public ProdutoModel(int id_produto, string nome, string observacao, decimal valor, string categoria, string link_foto, string codigo_produto, ICollection<ProdutoPedidoModel> produtoPedidoModels, bool excluido)
         {
             this.id_produto = id_produto;
             this.nome = nome;
@@ -34,6 +35,7 @@ namespace DoceGlamourCore.Models
             this.link_foto = link_foto;
             this.codigo_produto = codigo_produto;
             this.produtoPedidoModels = produtoPedidoModels;
+            this.excluido = excluido;
         }
 
         public ProdutoModel()
@@ -43,9 +45,13 @@ namespace DoceGlamourCore.Models
         public IPagedList<ProdutoModel> BuscarProdutosPaginados(ProdutoContext _produtoContext, int? pagina)
         {
             int PageNumber = pagina ?? 1;
-            return _produtoContext.produto.ToPagedList(PageNumber, 5);
+            return _produtoContext.produto.Where(op => op.excluido == false).ToPagedList(PageNumber, 5);
         }
         public List<ProdutoModel> BuscarProdutos(ProdutoContext _produtoContext)
+        {
+            return _produtoContext.produto.Where(op => op.excluido == false).ToList();
+        }
+        public List<ProdutoModel> BuscarProdutosComExcluidos(ProdutoContext _produtoContext)
         {
             return _produtoContext.produto.ToList();
         }
@@ -53,6 +59,7 @@ namespace DoceGlamourCore.Models
         {
             try
             {
+                this.excluido = false;
                 _produtoContext.Add(this);
                 _produtoContext.SaveChanges();
                 return true;
@@ -95,8 +102,8 @@ namespace DoceGlamourCore.Models
         {
             try
             {
-
-                _produtoContext.produto.Remove(this.BuscarProdutoID(_produtoContext, id));
+                var produto = _produtoContext.produto.Where(op => op.id_produto == id).FirstOrDefault();
+                produto.excluido = true;
                 _produtoContext.SaveChanges();
                 return true;
             }
