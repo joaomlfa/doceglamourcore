@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <main class="col-md-9 ml-sm-auto col-lg-10 ml-auto px-4">
+    <main class="col-md-9 ml-sm-auto col-lg-10 ml-auto">
         <div class="d-flex justify-content-between align-items-center mt-4  pb-2 mb-3">
             <h2>Pedidos em Aberto</h2>
         </div>
@@ -58,9 +58,9 @@
                                 <td>@pedido.tema</td>
                                 <td>@pedido.nome_crianca</td>
                                 <td>@pedido.valor_total</td>
-                                <td>@pedido.data_entrega.ToShortDateString()</td>
+                                <td>@pedido.data_entrega.ToString("dd/MM/yyyy")</td>
                                 <td>@pedido.valor_sinal</td>
-                                <td>@pedido.data_sinal.ToShortDateString()</td>
+                                <td>@pedido.data_sinal.ToString("dd/MM/yyyy")</td>
 
                             </tr>
 

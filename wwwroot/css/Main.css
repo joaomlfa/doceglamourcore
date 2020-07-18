@@ -1,3 +1,14 @@
 ﻿main {
-  margin-top: 15px;
+  top:30px;
+}
+@media(max-width: 800px) {
+    main{
+        left:40px;
+    }
+}
+@media(min-width: 800px) {
+    main {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
 }

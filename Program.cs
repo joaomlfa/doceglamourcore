@@ -20,6 +20,7 @@ namespace doceglamour
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls("http://*:8080");
                     webBuilder.UseStartup<Startup>();
                 });
     }

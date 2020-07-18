@@ -4,13 +4,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    left:0;
+    width:100%;
+    padding:0;
 
 }
 #atribuicao{
     float : right;
 }
-form{
-    margin-top : 200px;
-    margin-left : 200px;
-    margin-right: 200px;
+.principal{
+    top : 150px;
 }

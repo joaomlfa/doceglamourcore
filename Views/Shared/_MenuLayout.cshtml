@@ -1,4 +1,4 @@
-﻿!DOCTYPE html>
+﻿
 <html>
 <head>
     <meta charset="utf-8" />
@@ -15,59 +15,66 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Doce glamour</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Procurar" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="../../Menu/Sair">Sair</a>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav class=" col-md-2 col-lg-2 d-none d-md-block bg-light sidebar">
-
-                <ul class=" nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../../Menu/Index">
-                            <i class="fas fa-home"></i>Início
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../Cliente/Index">
-                            <i class="fas fa-user-plus"></i>Cliente
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../Produto/Index">
-                            <i class="fas fa-box-open"></i>Produto
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../Pedido/Index">
-                            <i class="fas fa-cart-arrow-down"></i>Pedido
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-dollar-sign"></i>Fluxo de Caixa
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../Relatorios/Index">
-                            <i class="fas fa-chart-line"></i>Relatórios
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-
-            @RenderBody()
-        </div>
+    <div>
+        <nav class="navbar fixed-top navbar-light bg-light">
+            <a class="navbar-brand" href="../../Menu/Index" style="font-family:Verdana">Doce Glamour</a>
+            <a class="navbar-brand" href="../../Menu/Sair" style="font-family: Verdana">Sair</a>
+            
+        </nav>
     </div>
+    
+    <div>
+        
+        <div class="sidebar col-md-2 col-lg-2" id="sidebarId">
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link active" href="../../Menu/Index">
+                        <i class="fas fa-home"></i>Início
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../Cliente/Index">
+                        <i class="fas fa-user-plus"></i>Cliente
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../Produto/Index">
+                        <i class="fas fa-box-open"></i>Produto
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../Pedido/Index">
+                        <i class="fas fa-cart-arrow-down"></i>Pedido
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-dollar-sign"></i>Fluxo de Caixa
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../Relatorios/Index">
+                        <i class="fas fa-chart-line"></i>Relatórios
+                    </a>
+                </li>
+            </ul>
+            <button class="sidebarBtn">
+                <span></span>
+            </button>
+            <div class="container">
+                <div class="row">
+                    <img src="~/LogoDoceGlamour.png" />
+                </div>
+                
+            </div>
 
+        </div>
+
+        @RenderBody()
+
+
+
+    </div>
 
 
 

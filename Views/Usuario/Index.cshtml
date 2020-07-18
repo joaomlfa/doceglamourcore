@@ -18,59 +18,56 @@
 
 </head>
 <body>
-    <div class="container">
-        <br />
-        <br />
-        <br />
-        <form asp-controller="Usuario" asp-action="Cadastrar" method="post">
-            <div class="form-row">
-                <div class="form-group col-md-6">
+   
+    <form asp-controller="Usuario" asp-action="Cadastrar" method="post">
+        <div class="container formCadastro">
+            <div class="row align-items-center">
+                <div class="col-md-12 align-self-center principal">
 
-                    <input type="email" class="form-control" id="email" asp-for="emailUsuario" aria-describedby="emailHelp" placeholder="Email" required>
-                    <span asp-validation-for="emailUsuario" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-3">
+                    <div class="form-group ">
+                        <input type="email" class="form-control" id="email" asp-for="emailUsuario"
+                               aria-describedby="emailHelp" placeholder="Email" required>
+                        <span asp-validation-for="emailUsuario" class="text-danger"></span>
+                    </div>
+                    <div class="form-group ">
+                        <input type="password" class="form-control" id="senha" asp-for="senha" placeholder="Senha"
+                               required>
+                        <span asp-validation-for="senha" class="text-danger"></span>
+                    </div>
+                    <div class="form-group ">
+                        <input type="password" class="form-control" id="senhaRepetida" placeholder="Repita a Senha"
+                               required>
+                    </div>
+                    <div class="form-group ">
+                        <input type="text" class="form-control" id="nomeUsuario" asp-for="nomeUsuario"
+                               placeholder="Nome Completo" required>
+                        <span asp-validation-for="nomeUsuario" class="text-danger"></span>
+                    </div>
+                    <div class="form-group ">
+                        <input type="tel" class="form-control" id="telefoneUsuario" asp-for="telefoneUsuario"
+                               placeholder="Telefone">
 
-                    <input type="password" class="form-control" id="senha" asp-for="senha" placeholder="Senha" required>
-                    <span asp-validation-for="senha" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-3">
+                    </div>
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                    <a href="https://pt.vecteezy.com/vetor-gratis/doces" id="atribuicao">Doces Vetores por Vecteezy</a>
 
-                    <input type="password" class="form-control" id="senhaRepetida" placeholder="Repita a Senha" required>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
 
-                    <input type="text" class="form-control" id="nomeUsuario" asp-for="nomeUsuario" placeholder="Nome Completo" required>
-                    <span asp-validation-for="nomeUsuario" class="text-danger"></span>
-
-                </div>
-                <div class="form-group col-md-6">
-
-                    <input type="tel" class="form-control" id="telefoneUsuario" asp-for="telefoneUsuario" placeholder="Telefone">
-
-
-                </div>
-
-            </div>
-            <button type="submit" class="btn btn-success">Cadastrar</button>
-            <a href="https://pt.vecteezy.com/vetor-gratis/doces" id="atribuicao">Doces Vetores por Vecteezy</a>
-        </form>
-
-    </div>
+        </div>
+    </form>
+   
 
 
 
 
 
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/Bootstrap 4/js/bootstrap.min.js"></script>
+        <script src="~/js/CadastrarUsuario.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/Bootstrap 4/js/bootstrap.min.js"></script>
-    <script src="~/js/CadastrarUsuario.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-
-
+   
 </body>
 </html>
