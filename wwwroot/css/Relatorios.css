@@ -4,37 +4,30 @@
 #imgPeriodo {
     max-width: 75%;
     max-height: 75%;
+    margin-top: 100px;
 }
 #imgGrafico {
     max-width: 89%;
     max-height: 89%;
+    margin-top: 100px;
 }
 #imgProduto {
     max-width: 80%;
     max-height: 80%;
-    margin-top : 260px;
+    margin-top : 130px;
 }
 
 
-#containerGrafico {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-left: 200px;
-}
+
 #relatorioPeriodo {
     margin-left: 12px;
-    margin-top: 15px;
+    
 }
 #relatorioGrafico {
     margin-left: 27px;
-    margin-top: 15px;
+    
 }
 #relatorioroduto {
     margin-left: 9px;
-    margin-top: 15px;
+   
 }

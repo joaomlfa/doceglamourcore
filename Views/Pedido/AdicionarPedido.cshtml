@@ -212,29 +212,51 @@
                         </table>
                     </div>
 
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-2 col-xl-2 col-sm-12">
+                                <label id="valor" for="ValorTotalInput">Valor Total:</label>
 
-                    <div id="valor">Valor Total:</div>
-                    <div id="valortotal" class="col-2">
-                        <input asp-for="valor_total" type="text" class="form-control" id="ValorTotalInput" readonly  />
-                    </div>
-                    <div id="desconto">Desconto R$:</div>
-                    <div id="valordesconto" class="col-2">
-                        <input asp-for="desconto" type="text" class="form-control" id="DescontoInput" onkeyup="somenteNumeros(this)" />
-                    </div>
-                    <div id="sinal">Sinal R$:</div>
-                    <div id="valorsinal" class="col-2">
-                        <input asp-for="valor_sinal" type="text" class="form-control" id="ValorSinalInput" onkeyup="somenteNumeros(this)" />
-                    </div>
-                    <div id="datasinal">Data do Sinal R$:</div>
-                    <div id="dataSinalDiv" class="col-2">
-                        <input asp-for="data_sinal" type="date" class="form-control" id="DataSinalInput" />
-                    </div>
-                    <input  type="text" id="produtoPedidoJSON" asp-for="produtoPedidoJSON" style="display:none">
-  
-                    <button type="submit" class="btn btn-primary" id="salvarpedido">Salvar Pedido</button>
-                    <a class="btn btn-danger" href="../../Pedido/Index"  id="cancelarpedido" role="button">Cancelar Pedido</a>
+                            </div>
+                            <div class="col-md-12 col-lg-2 col-xl-2 col-sm-12">
 
-                </form>
+                                <input asp-for="valor_total" type="text" class="form-control" id="ValorTotalInput" readonly />
+                            </div>
+                            <div class="col-md-12 col-lg-2 col-xl-2 col-sm-12">
+                                <label id="desconto">Desconto R$:</label>
+                            </div>
+                            <div class="col-md-12 col-lg-2 col-xl-2 col-sm-12">
+                                <input asp-for="desconto" type="text" class="form-control" id="DescontoInput" onkeyup="somenteNumeros(this)" />
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12 col-lg-2 col-xl-2 col-sm-12">
+                                <label id="sinal">Sinal R$:</label>
+                            </div>
+                            <div class="col-md-12 col-lg-2 col-xl-2 col-sm-12">
+                                <input asp-for="valor_sinal" type="text" class="form-control" id="ValorSinalInput" onkeyup="somenteNumeros(this)" />
+                            </div>
+                            <div class="col-md-12 col-lg-2 col-xl-2 col-sm-12">
+                                <label id="datasinal">Data Sinal:</label>
+                            </div>
+                            <div class="col-md-12 col-lg-2 col-xl-2 col-sm-12">
+                                <input asp-for="data_sinal" type="date" class="form-control" id="DataSinalInput" />
+                                <input type="text" id="produtoPedidoJSON" asp-for="produtoPedidoJSON" style="display:none">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12 col-lg-1 col-xl-1 col-sm-12">
+                                <button type="submit" class="btn btn-primary" id="salvarpedido">Salvar</button>
+                            </div>
+                            <div class="col-md-12 col-lg-1 col-xl-1 col-sm-12">
+                                <a class="btn btn-danger" href="../../Pedido/Index" id="cancelarpedido" role="button">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+              </form>
 
             </div>
         </div>

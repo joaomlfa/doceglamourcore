@@ -1,7 +1,7 @@
 ﻿function CarregarGrafico() {
     var ano = $("#selectAno").val();
-    var dataDe = "01/01/" + ano;
-    var dataAte = "01/12/" + ano;
+    var dataDe = ano + "/01/01";
+    var dataAte = ano + "/12/01";
 
     $(function () {
         $.ajax({
